@@ -7,6 +7,7 @@ if (!isset($_SESSION['id_wali'])) {
 }
 
 $id_wali = $_SESSION['id_wali'];
+$id_user = $_SESSION['user_id'];
 ?>
 
 <style>
@@ -41,13 +42,13 @@ $id_wali = $_SESSION['id_wali'];
     SELECT s.nis, s.nama, k.nama_kelas 
     FROM tb_siswa s
     LEFT JOIN tb_kelas k ON s.id_kelas = k.id_kelas
-    LEFT JOIN tb_walikelas w ON k.id_kelas = w.id_kelas
-    WHERE w.id_user = :id_wali
+    LEFT JOIN tb_walikelas w ON k.jurusan = w.jurusan
+    WHERE w.id_user = :id_user
     ";
     
 
     $stmt = $pdo->prepare($query);
-    $stmt->execute([':id_wali' => $id_wali]);
+    $stmt->execute([':id_user' => $id_user]);
     $siswa_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
     ?>
 

@@ -2,16 +2,15 @@
 <!-- HALAMAN LOGIN ADMIN -->
 
 <br>
-<h3 style="color: green;">Halo Admin</h3>
+<h3 style="color: green;">Dashboard WKS 1</h3>
 <?php
-require_once 'config.php';
+require_once './config.php';
 
 $query_kelas = "SELECT id_kelas, nama_kelas FROM tb_kelas";
 $stmt_kelas = $pdo->prepare($query_kelas);
 $stmt_kelas->execute();
 $kelas_list = $stmt_kelas->fetchAll(PDO::FETCH_ASSOC);
 
-// INI BUAT TAMBAH SISWA
 if (isset($_POST['add'])) {
     $nis = $_POST['nis'];
     $nama = $_POST['nama'];

@@ -19,17 +19,15 @@ if (!isset($_SESSION['level']) && !isset($_SESSION['nis'])) {
     // Menampilkan konten sesuai level pengguna
     if (isset($_SESSION['level'])) {
         if ($_SESSION['level'] == 'admin') {
-            include 'admin.php';  // Konten untuk admin
+            include 'admin.php';  
         } elseif ($_SESSION['level'] == 'petugas') {
-            include 'petugas.php';  // Konten untuk petugas
-        } elseif ($_SESSION['level'] == 'wakasek') {
-            include 'wakasek.php';  // Konten untuk wakasek (jika ada)
+            include 'petugas.php';  
         } elseif ($_SESSION['level'] == 'walikelas') {
-            include 'walikelas.php';  // Konten untuk walikelas
+            include 'walikelas.php';  
+        } else {
+            include 'wakasek.php';
         }
     }
-
-    // Menampilkan konten untuk siswa jika ada session nis
     if (isset($_SESSION['nis'])) {
         include 'siswa.php';  // Konten untuk siswa
     }

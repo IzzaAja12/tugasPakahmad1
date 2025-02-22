@@ -44,12 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 } elseif ($user['lvl'] == 'petugas') {
                     $_SESSION['login'] = 'petugas';
                     header('Location: index.php');  // Redirect ke halaman petugas
-                } elseif ($user['lvl'] == 'wakasek') {
+                } else {
                     header('Location: index.php');  // Redirect ke halaman wakasek
                 }
                 exit;
             } else {
                 $error = "Invalid username or password";
+                header("location: login.php?error=". $error);
+                exit();
             }
         } else {
             // Cek di tb_siswa jika user tidak ditemukan di tb_user
@@ -59,8 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $siswa = $stmt->fetch(PDO::FETCH_ASSOC);
         
             if ($siswa) {
-                if ($password === $siswa['pass']) { // Bandingkan langsung password input dengan yang ada di database
-                    // Set session untuk siswa
+                if ($password === $siswa['pass']) { 
+                
                     $_SESSION['nis'] = $siswa['nis'];
                     $_SESSION['nama'] = $siswa['nama'];
         
@@ -68,18 +70,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     exit;
                 } else {
                     $error = "Invalid username or password";
+                    header("location: login.php?error=". $error);
+                    exit();
                 }
             } else {
                 $error = "Invalid username or password";
+                header("location: login.php?error=". $error);
+                 exit();
             }
         }
         
     } catch (PDOException $e) {
-        $error = "Error: " . $e->getMessage();
+        header("location: login.php?error=". $e->getMessage());
+        exit();
     }
 }
 ?>
 
-<?php if (isset($error)): ?>
-    <div class="alert alert-danger"><?php echo $error; ?></div>
-<?php endif; ?>

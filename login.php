@@ -1,65 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Muhamad Nauval Azhar">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="This is a login page template based on Bootstrap 5">
+    <meta name="description" content="This is a login page template based on Tailwind CSS">
     <title>Login Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <section class="h-100">
-        <div class="container h-100">
-            <div class="row justify-content-sm-center h-100">
-                <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
-                    <div class="text-center my-5">
-                        <img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" alt="logo" width="100">
+
+<body class="bg-gray-100">
+    <section class="h-screen flex items-center justify-center">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center">
+                <div class="w-full max-w-md">
+                    <div class="text-center mb-8">
+                        <img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" alt="logo" class="w-24 mx-auto">
                     </div>
-                    <div class="card shadow-lg">
-                        <div class="card-body p-5">
-                            <h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
-                            <form method="POST" action="login_proses.php" class="needs-validation" novalidate="" autocomplete="off">
-                                <div class="mb-3">
-                                    <label class="mb-2 text-muted" for="email">Username</label>
-                                    <input id="email" type="text" class="form-control" name="username" required autofocus>
-                                    <div class="invalid-feedback">
-                                        Username is required
-                                    </div>
+                    <div class="bg-white shadow-lg rounded-lg p-8">
+                        <h1 class="text-2xl font-bold text-center mb-6">Login</h1>
+                        <form method="POST" action="login_proses.php" class="needs-validation" novalidate>
+                            <div class="mb-4">
+                                <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                                <input id="username" type="text" name="username" required
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                <div class="invalid-feedback text-red-500 text-sm mt-1 hidden">
+                                    Username is required
                                 </div>
-
-                                <div class="mb-3">
-                                    <div class="mb-2 w-100">
-                                        <label class="text-muted" for="password">Password</label>
-                                        <a href="forgot.html" class="float-end">
-                                            Forgot Password?
-                                        </a>
-                                    </div>
-                                    <input id="password" type="password" class="form-control" name="password" required>
-                                    <div class="invalid-feedback">
-                                        Password is required
-                                    </div>
-                                </div>
-
-                                <div class="d-flex align-items-center">
-                                    <div class="form-check">
-                                        <input type="checkbox" name="remember" id="remember" class="form-check-input">
-                                        <label for="remember" class="form-check-label">Remember Me</label>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary ms-auto">
-                                        Login
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="card-footer py-3 border-0">
-                            <div class="text-center">
-                                Don't have an account? <a href="register.html" class="text-dark">Create One</a>
                             </div>
-                        </div>
-                    </div>
-                    <div class="text-center mt-5 text-muted">
-                        Copyright &copy; 2017-2021 &mdash; Your Company 
+
+                            <div class="mb-4">
+                                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                                <input id="password" type="password" name="password" required
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                <div class="invalid-feedback text-red-500 text-sm mt-1 hidden">
+                                    Password is required
+                                </div>
+                            </div>
+                            <?php
+                                if(isset($_GET['error'])) :
+                            ?>
+                                 <div class="invalid-feedback text-red-500 font-medium text-sm mt-1 mb-2">
+                                    <?= $_GET['error'] ?>
+                                 </div>
+                            <?php
+                            endif;
+                            ?>
+                           
+                            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                                Login
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -67,4 +59,5 @@
     </section>
     <script src="js/login.js"></script>
 </body>
+
 </html>
